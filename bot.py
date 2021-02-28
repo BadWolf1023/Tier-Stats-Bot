@@ -23,15 +23,6 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
     update_data.start()
 
-def get_ctx_author_name(ctx):
-    try:
-        if ctx.author.nick:
-            return ctx.author.nick
-        else:
-            return ctx.author.name
-    except:
-        return ctx.author.name
-
 async def sendMessages(ctx, *args):
     await ctx.send('\n'.join(args), delete_after=30)
 
@@ -94,7 +85,7 @@ async def partneravg(ctx, *args):
     if (len(args) >= 2):
         name = ' '.join(args[1:])
     else:
-        name = get_ctx_author_name(ctx)
+        name = ctx.author.display_name
 
     formatted_name = format_name(name)
     data = stats.calc_partner_avg(formatted_name, type)
